@@ -6,7 +6,38 @@
 
 
 \chapter{Introduction}
-\label{sec:introduction}
+
+People increasingly use large language models (LLMs) such as ChatGPT across daily life—from studying and creative work to organizing tasks. 
+Recent surveys estimate that roughly one-third of adults rely on such tools, underscoring their growing role in everyday cognition and productivity\cite{pew2025artificial}. 
+This raises an important question: can LLMs genuinely help people with Attention-Deficit/Hyperactivity Disorder (ADHD) make sense of complex visual information, 
+or do they risk becoming yet another source of distraction in already stimulus-rich environments\cite{seabi2012adhd, intech2021adhd, laurascott2021golf}?
+
+ADHD can make it harder to maintain focus or filter out competing visual and textual details, especially when information is presented all at once. 
+Charts and graphs—usually designed to make data easier to grasp—can instead become overwhelming when they contain too many visual elements, 
+such as multiple colors, overlapping patterns, or decorative icons. 
+Prior research indicates that cluttered visualizations can slow attention, reduce comprehension, and increase errors in individuals with ADHD, 
+who are particularly sensitive to visual overload\cite{tran2024accessible, almuwaiziri2023}. 
+Simpler visuals with a clear structure, consistent colors, and direct labeling tend to work better because they minimize distractions and reduce cognitive effort. 
+
+This study examines the impact of varying levels of visualization complexity on comprehension and focus in individuals with ADHD, 
+as well as whether brief explanations from an LLM can facilitate their interpretation of data more effectively. 
+Two groups of participants took part—one received AI-generated explanations and the other worked without assistance—allowing for a comparison of comprehension, 
+accuracy, and overall experience. 
+The study also explores whether people with ADHD prefer simpler visuals than those without ADHD, 
+as previous work suggests that neurotypical users may tolerate more visual detail, while individuals with ADHD benefit from cleaner, less crowded layouts.
+
+By combining insights from visualization design and AI-based assistance, this research explores innovative methods to enhance data interpretation. 
+It focuses on how visual factors such as clutter, labeling, and color choice influence comprehension, while also testing whether brief, 
+targeted explanations from an LLM can serve as adaptive cognitive support. 
+These explanations are designed to guide the user’s attention rather than replace their reasoning, helping them focus on what matters most in complex visuals\cite{vizability2024, accessibleanalytics2023}. 
+Over time, such support may enhance comprehension strategies and reduce fatigue; however, it is also important to consider the risk of users relying too heavily on AI feedback.
+
+Ultimately, this study aims to enhance accessibility for neurodivergent users by comparing how individuals with and without ADHD interpret data visualizations 
+and how LLM-generated explanations impact their understanding. 
+Earlier research has shown that clear visual support helps individuals with ADHD engage more effectively with data; 
+however, little is known about how language-based aids can further enhance this process\cite{halpin2025adhd, almuwaiziri2023}. 
+The research is exploratory and limited to three common chart types—bar, pie, and line—each presented in two levels of complexity. 
+Still, it offers early insight into how design and AI can work together to create more cognitively inclusive ways of visualizing information.
 
 This is a typical human-computer interaction thesis structure for an introduction which is structured in four paragraphs as follows:
 % First Paragraph
@@ -37,6 +68,7 @@ Describe relevant scientific literature related to your work.
 
 \chapter{Study Design}
 
+
 \gls{er}
 
 \section{Apparatus}
@@ -49,15 +81,152 @@ Describe relevant scientific literature related to your work.
 
 \chapter{Results}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at nunc ut ex aliquam fermentum nec ut orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus sollicitudin pulvinar est, quis porttitor nisi egestas id. Cras et dignissim elit, vitae fringilla arcu. Aliquam rhoncus convallis aliquam. Aliquam erat volutpat. Proin efficitur sapien et velit aliquet imperdiet. Aenean tristique augue ultricies enim venenatis, ut mattis massa fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis vitae lobortis nunc. Nulla facilisis leo sed gravida elementum. Integer suscipit scelerisque lacinia. Nulla consectetur maximus purus a varius. Curabitur porta orci nisi, non porttitor lectus hendrerit vitae. Nam rutrum elementum nibh et luctus. Donec nec augue ultrices, ornare mauris non, iaculis nisl.
+% TODO (global):
+% - Replace placeholders (N=?, medians/means, percentages) with your numbers.
+% - Insert references to figures/tables once generated.
+% - Keep wording consistent with your Method chapter variables.
 
-Morbi faucibus lectus nec est imperdiet, quis placerat ligula pretium. Ut dignissim in orci eu ornare. Aenean id diam nunc. Integer dictum vitae lorem sit amet consectetur. Phasellus ac ipsum eget nisi gravida vehicula ac et metus. Vestibulum ac odio at diam dapibus tristique non quis massa. Praesent nec sollicitudin mauris. Nam elementum dictum est, id lacinia eros finibus quis. Suspendisse potenti. Quisque libero leo, iaculis sed sem quis, euismod tempor tellus. Aenean sit amet ex dapibus, fringilla purus et, sagittis metus. Aenean semper eget erat ac ullamcorper. Suspendisse convallis molestie nisi vitae dignissim.
+\section{Pie Charts}
 
+\subsection{Performance (Accuracy \& Time)}
+% TODO:
+% - Report accuracy (median/mean % correct) for pie with/without hints.
+% - Report response time (median) for pie with/without hints.
+% - If applicable, split descriptively by ADHD vs. non-ADHD (short).
+% - Note any obvious ceiling/floor or outliers you removed.
 
+% Example sentence template (edit numbers later):
+% Participants achieved a median accuracy of XX\% on pie charts without hints and YY\% with hints; median completion time increased from A.A\,s to B.B\,s when hints were present.
+
+\subsection{Preference \& Overstimulation}
+% TODO:
+% - Count how many preferred pie vs. disliked vs. skipped (overstimulating).
+% - Note common reasons for dislike/skip (color, 3D, labels).
+% - Insert 1 short anonymized quote if you have it.
+
+% Example placeholder for a table:
+\begin{table}[h]
+  \centering
+  \caption{Pie chart preference and skip rates.}
+  \begin{tabular}{lccc}
+    \toprule
+    & Preferred & Not Preferred & Skipped \\
+    \midrule
+    Pie (no hint) & -- & -- & -- \\
+    Pie (hint)    & -- & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Summary (Pie)}
+% TODO:
+% - One or two lines: did pie charts work well or not, and did hints help/hurt?
+
+\section{Bar Charts}
+
+\subsection{Performance (Accuracy \& Time)}
+% TODO:
+% - Accuracy/time for bar with/without hints (+ optional ADHD vs. non-ADHD split).
+% - Mention any order effects only if they’re strong or obvious.
+
+\subsection{Preference \& Overstimulation}
+% TODO:
+% - Who preferred bar charts? Any skips? Any 3D variants disliked?
+% - Add 1 short quote if helpful.
+
+% Example figure placeholder:
+\begin{figure}[h]
+  \centering
+  % \includegraphics[width=.8\linewidth]{figs/bar_accuracy_by_condition.pdf}
+  \caption{Bar chart: accuracy by condition (with vs.without hints).}
+\end{figure}
+
+\subsection{Summary (Bar)}
+% TODO:
+% - One or two lines: bar charts likely highest comprehension / most preferred?
+
+\section{Line Charts}
+
+\subsection{Performance (Accuracy \& Time)}
+% TODO:
+% - Accuracy/time for line with/without hints (+ optional ADHD vs. non-ADHD).
+
+\subsection{Preference \& Overstimulation}
+% TODO:
+% - Preference counts, skip counts; mention if overlapping lines/labels caused issues.
+
+\subsection{Summary (Line)}
+% TODO:
+% - One or two lines: moderate difficulty? Any consistent hint-related slowdowns?
+
+\section{Evaluation of LLM-Generated Hints}
+Across all chart types, participants showed similar reactions to the hover-based hints.
+
+\subsection{Perceived Usefulness}
+% TODO:
+% - Report median/mean usefulness rating (1–5).
+% - % of participants calling hints “helpful” vs. “distracting”.
+% - 1–2 short quotes illustrating redundancy/distracting nature.
+
+\subsection{Effect on Performance}
+% TODO:
+% - Summarize whether hints changed accuracy and/or time (direction + magnitude).
+% - If consistent across chart types, state it once here to avoid repetition.
+
+\subsection{Qualitative Themes}
+% TODO:
+% - List 3–4 themes with counts (e.g., “too much text” (n=?), “breaks focus” (n=?), “confirmation only” (n=?)).
+
+\section{Summary of Findings}
+
+% TODO:
+% - Bullet the key findings across chart types and hint presence:
+%   * Which chart had highest accuracy / lowest time?
+%   * Which chart was most preferred / most skipped?
+%   * Overall effect of hints (usefulness rating low? time up? accuracy flat/down?)
+% - One sentence linking to Discussion: e.g.,
+%   “Together, these results suggest simple, low-text visuals support ADHD users better than added hover explanations.”
+
+% Optional compact table summarizing the whole chapter:
+\begin{table}[h]
+  \centering
+  \caption{Compact summary across chart types and conditions. Replace dashes with your values.}
+  \begin{tabular}{lcccc}
+    \toprule
+    Chart Type & Accuracy (No Hint) & Accuracy (Hint) & Median Time No/Hint (s) & Preference (n) \\
+    \midrule
+    Pie  & --\% & --\% & -- / -- & -- \\
+    Bar  & --\% & --\% & -- / -- & -- \\
+    Line & --\% & --\% & -- / -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \chapter{Discussion}
 
+\todo{This chapter discusses the implications of the results presented in the previous chapter. It should interpret the findings in relation to the research questions and existing literature, highlight the significance of the study, acknowledge its limitations, and suggest directions for future research. The discussion is structured into four main sections: Key Findings, Limitations, Future Work, and Summary of Discussion.} 
+
+The results indicate that \textbf{simple, clean visual designs} are easier for participants with ADHD traits to process than complex or text-heavy charts. Among the three chart types tested—bar, pie, and line—the bar chart consistently achieved the highest comprehension accuracy and was preferred by most participants. In contrast, pie charts were often skipped or described as confusing, suggesting that circular or 3D layouts may increase visual load. Line charts produced moderate performance, with some participants reporting difficulty tracking overlapping lines.
+
+Across all chart types, static AI generated hints did not lead to higher accuracy or faster responses. Most participants rated these hints as distracting rather than helpful, describing them as redundant or visually overwhelming. This supports the idea that additional text—even when well-intentioned—can raise cognitive load for users who already struggle with attention management. In other words, more information does not necessarily mean better accessibility.
+
+An interesting observation emerged from the option to skip overstimulating charts. Several ADHD participants used this option more frequently than non-ADHD participants, especially for colorful or visually dense designs. This behavior provides indirect evidence that overstimulation can be quantitatively observed through avoidance patterns, not only through self-reported distraction.
+
+Overall, the findings suggest that accessibility for ADHD users is best supported by minimalist design choices: limited color palettes, direct labeling, and layouts with few competing visual elements. AI-based assistance may only be helpful if it adapts to user needs and remains optional rather than persistent.
+
+
+
+
+
+\section{Limitations and Future Work}
+
+
+
+
+
+
+
 \chapter{Conclusion}
-\label{sec:conclusion}
+This thesis investigated how individuals with ADHD interpret data visualizations of varying complexity and whether AI-generated explanations could enhance their comprehension. The study compared three common chart types—bar, pie, and line—presented in both simple and complex formats, with and without hover-based hints generated by a large language model (LLM).
 
 \todo{Outlook}
