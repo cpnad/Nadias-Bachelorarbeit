@@ -1,0 +1,75 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{WSPA}{book}{}{}
+      \name{author}{5}{}{%
+        {{hash=ad25b96bff24b15f8bc4c35beab635c7}{%
+           family={Weerawarana},
+           familyi={W\bibinitperiod},
+           given={Sanjiva},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d242b74b900a6acca71998585077d35e}{%
+           family={Curbera},
+           familyi={C\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=415e2bec5763afbeeeadd2e0c4bd0696}{%
+           family={Leymann},
+           familyi={L\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+        {{hash=929c53a1430bccde73afa95a7bac173b}{%
+           family={Storey},
+           familyi={S\bibinitperiod},
+           given={Tony},
+           giveni={T\bibinitperiod}}}%
+        {{hash=a3618d51d416792ba06290a591a9cc89}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={Donald\bibnamedelima F.},
+           giveni={D\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall PTR}%
+      }
+      \strng{namehash}{b4cf1e15ca3f80d94dc0773a36835c02}
+      \strng{fullhash}{b18a1ccafdce4ed3509aa3b9975df9be}
+      \strng{fullhashraw}{b18a1ccafdce4ed3509aa3b9975df9be}
+      \strng{bibnamehash}{b18a1ccafdce4ed3509aa3b9975df9be}
+      \strng{authorbibnamehash}{b18a1ccafdce4ed3509aa3b9975df9be}
+      \strng{authornamehash}{b4cf1e15ca3f80d94dc0773a36835c02}
+      \strng{authorfullhash}{b18a1ccafdce4ed3509aa3b9975df9be}
+      \strng{authorfullhashraw}{b18a1ccafdce4ed3509aa3b9975df9be}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0131488740}
+      \field{title}{Web Services Platform Architecture : SOAP, WSDL, WS-Policy, WS-Addressing, WS-BPEL, WS-Reliable Messaging, and More}
+      \field{year}{2005}
+      \verb{doi}
+      \verb 10.1.1/jpb001
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

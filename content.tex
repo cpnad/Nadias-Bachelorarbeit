@@ -6,58 +6,493 @@
 
 
 \chapter{Introduction}
+
 \label{sec:introduction}
+In today’s increasingly data-driven world, charts and infographics shape how people make sense of information—from everyday news to education, policy, and work decisions. Yet, most of these visualizations are created for neurotypical audiences, overlooking how individuals with Attention-Deficit/Hyperactivity Disorder (ADHD) may perceive and process visual information differently. For people with ADHD, cluttered layouts, overlapping elements, or excessive color can quickly lead to distraction and cognitive overload, turning what should be an intuitive visual experience into a mentally taxing task.
 
-This is a typical human-computer interaction thesis structure for an introduction which is structured in four paragraphs as follows:
-% First Paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P1.1. What is the large scope of the problem?}
-\todo{P1.2. What is the specific problem?}
+These challenges raise a crucial design question: \textit{How can data visualizations be made clearer and more accessible for users with attentional differences?} Prior accessibility research suggests that minimalist layouts and direct labeling improve readability by reducing unnecessary visual load. At the same time, recent advances in large language models (LLMs) introduce a new opportunity: adding short, AI-generated explanations that can guide the viewer’s attention. Such hints might clarify key patterns and reduce confusion, but if poorly integrated or overly verbose, they risk increasing the very cognitive load they aim to alleviate.
 
-% Second Paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P2.1. The second paragraph should be about what have others been doing}
-\todo{P2.2. Why is the problem important? Why was this work carried out?}
+Existing work in Human–Computer Interaction (HCI) and cognitive learning sciences highlights the importance of minimizing split attention and extraneous detail to preserve limited working memory \citep{sweller1988cognitive}. Inclusive and neurodiversity-aware visualization research has begun translating these insights into concrete design recommendations—emphasizing direct labeling, restrained color use, and reduced clutter—to accommodate attention variability \citep{tran2024accessible,gajos2022neurodiverse}. In parallel, AI-supported visualization systems have emerged that leverage LLMs for on-demand explanations or conversational guidance, demonstrating how such tools can help viewers focus on relevant details without overloading them \citep{vizability2024,accessibleanalytics2023}. As visualization becomes increasingly integrated into decision-making across domains, designers need actionable evidence on how these strategies affect users with ADHD specifically.
 
-% Third Paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P3.1. What have you done?}
-\todo{P3.2. What is new about your work?}
-
-% Fourth paragraph
-% CORE MESSAGE OF THIS PARAGRAPH:
-\todo{P4.1. What did you find out? What are the concrete results?}
-\todo{P4.2. What are the implications? What does this mean for the bigger picture?}
-
-LaTeX hints are provided in \autoref{chap:latexhints}.
+This thesis investigates how adults with ADHD interpret three common chart types—bar, line, and pie—across minimalist and decorated designs, and examines whether brief, LLM-generated hover hints support or hinder comprehension. By combining comprehension accuracy, user preferences, and qualitative reflections, the study captures both performance and experience. It focuses on two factors: (1) everyday design choices such as 3D pies, stacked bars, and direct value labels, and (2) lightweight AI-based scaffolding through static hover hints. Rather than proposing a complex system, it evaluates practical design decisions that affect how ADHD users engage with visual data. Ultimately, this work offers empirical and design-based insights for more inclusive visualization. By revealing when AI-generated guidance clarifies information and when it distracts, the findings inform principles for cognitively considerate chart design, bridging accessibility research, cognitive theory, and emerging AI tools for attention-diverse audiences.
+\cleardoublepage
 
 \chapter{Related Work}
 
-Describe relevant scientific literature related to your work.
+Research on attention and cognition provides an essential foundation for understanding how people with ADHD experience visual information. ADHD is not defined by an absence of attention but rather by difficulties in regulating it—individuals often oscillate between distraction and hyperfocus depending on task clarity and personal interest \citep{fisher2022attention}. Neuroimaging research attributes these fluctuations to atypical activity in the brain’s default-mode network, which may cause frequent mind-wandering during cognitively demanding tasks \citep{sonuga2005default,castellanos2006adhd}. Qualitative accounts describe similar experiences in daily life: visual clutter, unclear hierarchies, and competing stimuli can quickly overwhelm focus and lead to cognitive fatigue \citep{seabi2012adhd}. Taken together, these findings imply that ambiguous or visually dense interfaces are particularly challenging for individuals with ADHD, while clear grouping, minimal clutter, and direct labeling can stabilize attention and sustain engagement.
+
+Cognitive Load Theory (CLT) provides a theoretical explanation for why such clarity is effective. Because working memory has limited capacity, any element that does not directly contribute to a reasoning or learning goal adds to the \textit{extraneous load} \citep{sweller1988cognitive}. For people with ADHD—whose attentional control is already strained—this limitation is magnified. Designs that force users to integrate spatially separated text and visuals, a phenomenon known as the \textit{split-attention effect}, further consume cognitive resources \citep{ayres2010split}. Complementary frameworks such as Dual Coding Theory emphasize that visual and verbal information can reinforce understanding when both are concise and spatially aligned \citep{paivio1990mental}. For neurodivergent audiences, brief and well-integrated textual cues can clarify meaning, but redundant or overly detailed descriptions risk creating the opposite effect: distraction through verbal overload. Effective visualization design for ADHD therefore requires not only visual simplicity but also careful multimodal integration.
+
+From a perceptual perspective, Gestalt principles explain how humans naturally organize visual information into coherent patterns. Cues such as proximity, similarity, and continuity help viewers “chunk” complex data into manageable units \citep{wertheimer1938laws}. In visualization design, these principles underpin why consistent color, spacing, and alignment support faster and more accurate interpretation. Empirical studies of graphical perception further show that people make the most precise quantitative judgments when comparing position or length rather than area or angle \citep{cleveland1984graphical}. This hierarchy helps explain why bar charts often outperform pie charts in accuracy—an insight with particular relevance for ADHD users, whose perceptual stability may depend on low-load, spatially consistent visual mappings. In essence, a clean, structured visual hierarchy reduces the mental effort required to maintain focus.
+
+The ongoing debate about how much visual detail is “too much” highlights the tension between engagement and clarity. Certain forms of embellishment can enhance memorability and emotional appeal \citep{bateman2010useful}, yet excessive decoration often undermines performance—especially under high cognitive demand \citep{almuwaiziri2023}. Classic visualization theorists such as Tufte \citep{tufte1983visual} and Few \citep{few2012show} argue for maximizing the \textit{data-ink ratio} by using only graphical elements that directly convey information. Recent accessibility research extends this logic to neurodiverse users, noting that ADHD viewers are more prone to overload when confronted with competing colors, shadows, or textures \citep{tran2024accessible}. Moderate visual richness may support engagement, but once a threshold is crossed, stimulation becomes distraction—a transition that appears to occur earlier for ADHD users.
+
+Within the field of Human–Computer Interaction (HCI), neuroinclusive and adaptive visualization has emerged as a growing research area. Inclusive design frameworks advocate presenting information in ways that accommodate diverse cognitive processes and sensory sensitivities \citep{gajos2022neurodiverse}. Studies on ADHD-friendly visualization specifically recommend direct labeling, consistent color use, and avoidance of unnecessary motion or background noise \citep{tran2024accessible}. Meanwhile, advances in natural language generation and large language models (LLMs) have inspired new ways to make visualizations more explainable. Systems such as \textit{VizAbility} demonstrate how conversational AI can provide personalized, on-demand explanations for visual data \citep{vizability2024}, while initiatives like \textit{Accessible Analytics} advocate pairing concise textual summaries with graphics to enhance understanding without overloading attention \citep{accessibleanalytics2023}. Together, these developments point toward hybrid approaches where AI-generated assistance complements clear design rather than replacing it.
+
+Bringing these strands together, prior work converges on several consistent insights. First, ADHD users are highly sensitive to visual clutter and divided attention, making clean layouts and clear structure fundamental \citep{castellanos2006adhd,sonuga2005default}. Second, minimizing extraneous cognitive load while integrating succinct verbal cues can substantially improve comprehension \citep{sweller1988cognitive,paivio1990mental}. Third, perceptual accuracy is strongest for encodings based on position and length, reinforcing the advantages of bar and line charts over area- or texture-based designs \citep{cleveland1984graphical}. Finally, adaptive or AI-assisted visualization systems hold promise for tailoring data presentation to individual cognitive needs \citep{tran2024accessible,gajos2022neurodiverse,vizability2024}. 
+
+Building on this foundation, the present thesis empirically examines how ADHD users engage with everyday chart types across different design complexities, with and without short LLM-generated hover hints. While much of the existing research has discussed cognitive principles in theory, few studies have tested them directly in realistic visualization contexts through user feedback. This work aims to close that gap, translating theoretical insights into practical design evidence for creating visualizations that are not only inclusive but also cognitively sustainable for attention-diverse audiences.
+\cleardoublepage
 
 \chapter{Study Design}
 
-\gls{er}
+The study investigated how adults with ADHD perceive and interpret common chart types under varying visual complexity and with or without AI-generated hover explanations. Using interactive Figma prototypes, participants compared different designs of bar, line, and pie charts, each created in pairs to isolate one stylistic variable (e.g., 2D vs.\ 3D, simple vs.\ labeled, plain vs.\ combined). The goal was to measure how design choices and on-demand explanations influence comprehension accuracy, task duration, and user preference. The experiment followed a within-subject design, where each participant viewed all chart types, but only one condition—either with or without the LLM-generated hints. Quantitative data (accuracy scores and timing) were collected automatically through the survey platform, while qualitative feedback was gathered through open-ended responses. Together, these methods provide both behavioral and subjective insight into how AI-supported visualization affects cognitive load and clarity for ADHD users.
 
 \section{Apparatus}
 
+The study was conducted entirely online using the prototyping platform \textit{Figma} to display interactive chart stimuli and \textit{Qualtrics} to collect responses. Each visualization was presented as a high-fidelity mock-up simulating real-world data dashboards. Participants interacted with these charts directly in their browser, using a cursor to hover over designated areas where explanatory hints appeared. The LLM-generated text for these hover hints was produced using \textit{ChatGPT 4.0} and manually embedded into the prototypes as static tooltips. This ensured that all participants in the assisted condition received identical explanations, maintaining experimental consistency.
+
+Each chart set—bar, line, and pie—was designed in both baseline and modified versions. Baseline charts followed a minimalist aesthetic with neutral colors, simple axes, and clear labeling, while modified versions varied one key visual element such as gradients, 3D effects, overlapping lines, or integrated labels. This setup isolated the effect of design embellishment on comprehension while keeping all other factors constant. The survey interface automatically recorded accuracy and time per question, while a structured post-task questionnaire collected user preferences, perceived difficulty, and opinions on the hover explanations. All data were stored anonymously in CSV format for later analysis using \textit{Microsoft Excel}.
+
+Each variant was carefully designed to balance readability, engagement, and cognitive demand. Simpler charts were expected to minimize extraneous cognitive load and support sustained attention, following Cognitive Load Theory \citep{sweller1988cognitive}. More decorated versions, while potentially more engaging, were hypothesized to increase perceptual clutter and divide attention, especially for users with ADHD who may be more sensitive to visual distractions \citep{tran2024accessible, gajos2022neurodiverse}. This approach aligns with neuroinclusive design principles emphasizing clarity, consistency, and minimal visual noise as key factors in accessible information visualization.
+
+\subsection{Bar Chart Stimuli}
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}{0.31\textwidth}
+    \includegraphics[width=\linewidth]{figures/Bar_1.png}
+    \caption{Baseline Bar Chart}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.31\textwidth}
+    \includegraphics[width=\linewidth]{figures/Bar_2.png}
+    \caption{Bar Chart with Lines}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.31\textwidth}
+    \includegraphics[width=\linewidth]{figures/Bar_3.png}
+    \caption{Bar Chart with Lines and Labels}
+  \end{subfigure}
+
+  \vspace{0.6em}
+
+  \begin{subfigure}{0.31\textwidth}
+    \includegraphics[width=\linewidth]{figures/Bar_4.png}
+    \caption{Stacked Bar Chart}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.31\textwidth}
+    \includegraphics[width=\linewidth]{figures/Bar_5.png}
+    \caption{Bar Chart with Pictographs}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.31\textwidth}
+    \includegraphics[width=\linewidth]{figures/Bar_6.png}
+    \caption{Bar Chart with Pictographs and Lines}
+  \end{subfigure}
+
+  \caption{Bar chart stimuli used in the study, illustrating six visual design variants.}
+  \label{fig:barStimuli}
+\end{figure}
+
+The bar chart set consisted of six visual variants, each depicting the same dataset to ensure that only visual style—not content—varied across stimuli. These designs represented typical real-world examples of data comparison and tested how different visual complexities influence comprehension among adults with ADHD. The first chart (\textit{Plain Bars}) featured a minimalist layout with simple vertical bars and clear axis labels. The second (\textit{Bars with Lines}) added subtle line markers, while the third (\textit{Bars with Labels}) displayed direct numeric labels to reduce visual scanning effort. The fourth (\textit{Stacked Bars}) incorporated color segments for multi-category comparisons, and the fifth (\textit{Bars with Icons}) used small pictorial symbols for decoration. The final version combined multiple elements to explore potential visual overload.
+
+\subsection{Pie Chart Stimuli}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\linewidth]{figures/Pie_Minimal_1.png}
+    \caption{Baseline Pie Chart}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\linewidth]{figures/Pie_or_Donut_5.png}
+    \caption{Donut Chart}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\linewidth]{figures/Pie_icon_legend_2.png}
+    \caption{Icon-Embedded Pie Chart}
+  \end{subfigure}
+
+  \vspace{0.6em}
+
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\linewidth]{figures/Pie_3D_4.png}
+    \caption{3D Pie Chart}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\linewidth]{figures/PIe_Design_3.png}
+    \caption{Textured or Embellished Pie Chart}
+  \end{subfigure}
+
+  \caption{Pie chart stimuli used in the study, illustrating five visual design variants.}
+  \label{fig:pieStimuli}
+\end{figure}
+
+The pie chart set included five design variants, each presenting the same categorical dataset to isolate the impact of visual style on perception. Variations explored how dimensionality, labeling, and decoration affect clarity and cognitive load. The first chart (\textit{Plain 2D Pie}) served as the minimalist baseline, while the second (\textit{Icon and Legend Pie}) replaced direct labels with icons and a legend. The third (\textit{Textured Pie}) added shadows and patterns, the fourth (\textit{3D Pie}) introduced depth, and the fifth (\textit{Donut Pie}) used a central gap for comparison.
+
+These variants tested trade-offs between visual richness and cognitive simplicity. Simpler layouts were expected to yield higher accuracy and comfort, whereas decorative features like shadows or textures were hypothesized to draw attention away from data. Pie charts were chosen for their popularity and perceptual difficulty: people generally struggle to compare angles or areas precisely \citep{cleveland1984graphical}, a challenge potentially heightened for ADHD users sensitive to clutter. By varying visual complexity, this study identified stylistic choices that make proportional data more cognitively accessible.
+
+\subsection{Line Chart Stimuli}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/Line_11.png}
+    \caption{Baseline Line Chart}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/Line_12.png}
+    \caption{Line Chart with Labels}
+  \end{subfigure}
+
+  \vspace{0.3em}
+
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/Line_21.png}
+    \caption{Line and Bar Combination}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/Line_22.png}
+    \caption{Multi-Metric Line Chart}
+  \end{subfigure}
+
+  \vspace{0.3em}
+
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/Line_4.png}
+    \caption{Line and Bar with Labels}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{figures/9.png}
+    \caption{Multi-Metric Line with Simplified Axes}
+  \end{subfigure}
+
+  \caption{Line chart stimuli used in the study, illustrating six visual design variants.}
+  \label{fig:lineStimuli}
+\end{figure}
+
+The line chart set featured six variants built from an identical dataset showing value changes over time. The first (\textit{Plain Line}) served as the baseline, while subsequent variants introduced increasing complexity: numeric labels, dual axes, multiple lines, line–bar combinations, and gradient fills. These formats tested how visual density affects comprehension and focus in ADHD users. Consistent with cognitive load theory \citep{sweller1988cognitive}, simpler single-variable designs were expected to be easier to follow, whereas overlapping lines or mixed encodings might fragment attention.
+
+For ADHD viewers, continuous tracking requires stable focus over time, making line charts particularly sensitive to clutter and legend design. By comparing minimalist and embellished versions, this study examined how attentional capacity interacts with temporal complexity and identified which features make time-based data clearer and more inclusive.
+
 \section{Procedure}
+
+Participants completed the study remotely via a Qualtrics survey linked to a Figma prototype. Before beginning the main tasks, they were presented with an introduction page explaining the study’s purpose, structure, and estimated duration. The instructions emphasized that there were no right or wrong answers and that any difficulty in interpreting the charts was part of the research interest. Participants were informed that the study examined how different chart designs and AI-generated hover explanations influence understanding and attention. They were also notified that they could skip any chart that felt overstimulating, ensuring ethical consideration for neurodivergent participants.
+
+After providing consent, participants were randomly assigned to one of two conditions: with LLM-assisted explanations or without. Each participant remained in the same condition throughout the entire study to prevent cross-contamination between assistance modes. Those in the assisted condition viewed charts that included hover-based hints written by ChatGPT-4, while the unassisted group saw the same charts without any textual help. In both cases, participants completed identical tasks and questions for each visualization type.
+
+The study consisted of three major blocks corresponding to chart types: bar, pie, and line. Within each block, participants encountered several comparison pairs, each designed to isolate one visual variable (for example, plain bar vs.\ 3D bar, or line chart vs.\ line chart with labels). For each comparison, they answered comprehension questions such as identifying the highest value, comparing two data points, or recognizing a trend. Participants also indicated which version they found easier to read or more visually appealing. This approach allowed the study to gather both objective accuracy data and subjective preference data simultaneously.
+
+Every question page displayed two charts side by side for direct comparison. Participants could examine both charts freely before selecting their answer. For those in the LLM-assisted condition, hovering over specific chart elements revealed brief, contextual explanations generated in advance. These explanations summarized the main data trend or clarified axis information, for example: “The category ‘A’ shows the steepest increase across years” or “The largest slice represents 40\% of the total.” The hints were static and designed to be concise, avoiding cognitive overload while simulating what an adaptive AI system might provide.
+
+After completing all visualization tasks, participants were asked to rate their overall experience using Likert-scale questions on clarity, difficulty, and distraction level. They were also encouraged to write free-text feedback describing what they found helpful or challenging about the charts and the AI hints. This open-ended section provided valuable qualitative insights into how users with ADHD perceive visual and textual complexity.
+
+The entire session took approximately 25–30 minutes to complete. Most participants used laptops or desktop computers, though device type and screen size were not strictly controlled since the study took place in naturalistic home environments. Response times were automatically recorded by the Qualtrics platform for each question, including the time spent reading and interacting with the Figma prototype. At the end of the survey, participants received a short debriefing message reiterating the study’s purpose and thanking them for their time. Data were exported in CSV format for quantitative analysis and manually coded for thematic analysis of open-ended feedback.
 
 \section{Measurements}
 
+This section describes how data were collected and operationalized to evaluate participants’ comprehension, preferences, and qualitative reflections in relation to chart design and AI-generated assistance. Each measurement captures a different dimension of the participant experience—ranging from quantitative accuracy to subjective impressions and open-ended feedback—allowing for a multifaceted understanding of how people with ADHD interact with visual information.
+
+\subsection{Comprehension Accuracy}
+
+The primary quantitative measure in this study was comprehension accuracy, defined as the percentage of correct answers given to interpretation questions for each chart type. Participants were asked a set of structured questions for every visualization, such as identifying the largest category, estimating differences between data points, or recognizing trends. Each answer was scored as either 1 (correct) or 0 (incorrect). For certain items that contained partially correct reasoning (for example, identifying the right category but misreporting the value), fractional scores (0.5) were occasionally assigned to better reflect partial understanding. These scores were entered into an Excel sheet and used to calculate mean accuracy per participant and per chart type.
+
+The comprehension test was repeated under two conditions: one without LLM-generated hints (baseline) and one with short hover-based textual hints generated by a language model. The purpose was to examine whether these brief explanations improved or hindered understanding. After individual question scores were entered, the mean scores were averaged across each participant group (LLM-assisted vs. unassisted) and compared using a single-factor analysis of variance (ANOVA) in Microsoft Excel. This test was chosen because it allows for assessing whether the differences in mean accuracy between the two conditions were statistically significant. The ANOVA output included between-group variance, within-group variance, and significance (\emph{p}-value) to determine if any observed effects of LLM assistance on comprehension were meaningful.
+
+While comprehension scores are a direct proxy for how accurately participants interpreted the charts, they also indirectly reflect cognitive load and information clarity. Higher scores indicate that the visual layout allowed participants to extract information efficiently, while lower scores may suggest distraction, misinterpretation, or excessive complexity. Because participants with ADHD often experience fluctuating attention, the comparison between plain and decorated designs was especially relevant for identifying which visuals imposed minimal extraneous cognitive load. Similarly, comparing the LLM-assisted and unassisted conditions offered insights into whether additional textual scaffolding supported or disrupted attention. As discussed later, the ANOVA results showed no statistically significant difference between the two conditions, implying that while hints did not harm comprehension, they also did not provide a measurable performance advantage. This finding highlights that design clarity itself remains the stronger determinant of understanding.
+
+\subsection{Chart Preference Ratings}
+
+Alongside comprehension accuracy, participants expressed their subjective preferences for each chart pair. After completing the comprehension questions for a given visualization set, they were asked which version they found easier, clearer, or more comfortable to look at. These preferences were collected for each chart comparison (e.g., plain vs. 3D pie, simple vs. stacked bar, clean line vs. textured line). Responses were recorded in a frequency table where each column represented a design variant and each row a participant’s choice. The aggregated counts were then visualized as bar charts to illustrate overall preference trends.
+
+Unlike comprehension accuracy, preference data capture affective and perceptual comfort rather than performance. For participants with ADHD, preference is a meaningful indicator of accessibility because feelings of overstimulation or clutter can drive avoidance behavior. A participant who skips or dislikes a chart may do so not because it is harder to understand cognitively, but because it overwhelms their attention or sensory threshold. Thus, preference frequencies provide valuable evidence of which design features are not only efficient but also emotionally sustainable for users with attentional challenges.
+
+Preference data were analyzed descriptively rather than inferentially. Because each participant viewed all chart types, preference distributions could be directly compared across designs without statistical modeling. Bar charts summarizing the number of votes per design made it possible to identify clear trends—such as the consistent preference for simple, flat designs across all chart categories. The resulting visualization summaries supported the interpretation that simplicity, direct labeling, and high data-to-ink ratios are universally preferred among ADHD participants, regardless of LLM condition.
+
+\subsection{Evaluation of LLM-Generated Hints}
+
+The third measure focused on participants’ reactions to the LLM-generated hover hints. In the assisted condition, each chart included a short textual description that appeared when hovering over specific visual elements. These hints were designed to summarize the main takeaway of the chart, such as identifying the highest value or describing a visible trend. Participants were encouraged to use them freely, and after completing each block, they rated how helpful or distracting they found these hints.
+
+Since the hint feedback was qualitative in nature, responses were coded manually after the study. Each comment was categorized as \emph{positive}, \emph{neutral}, or \emph{negative} based on whether the participant described the hints as helpful, redundant, or distracting. For example, statements such as “the hint confirmed what I saw” were marked positive, while remarks like “too much reading” or “it made me lose focus” were coded as negative. Neutral responses often noted that the hints were “fine but unnecessary.” This coding allowed for a simple overview of sentiment trends without imposing quantitative assumptions on a small sample.
+
+The purpose of this measure was to complement the comprehension and preference data with insight into participants’ subjective cognitive experience. In cognitive-load terms, a “helpful” hint likely reduced extraneous load by clarifying relevant information, while a “distracting” hint may have added to it by splitting attention between text and visuals. As discussed in the results, opinions were divided: some participants appreciated the reassurance the hints provided, while others found them interruptive. Despite the mixed reactions, this feedback provided valuable direction for future adaptive design. It suggests that static, non-personalized hints may not fully align with the flexible attentional patterns of ADHD users, pointing toward more interactive or user-controlled assistive systems.
+
+\subsection{Qualitative Reflections and Open-Ended Feedback}
+
+At the end of the survey, participants were invited to provide general comments about their experience with the charts, the LLM hints, or the overall difficulty of the tasks. Although not mandatory, many participants shared short reflective notes, which were analyzed qualitatively to enrich interpretation of the quantitative data. These comments frequently highlighted moments of overstimulation (“too much going on,” “chaotic layout”) or appreciation for simplicity (“clean and easy,” “finally something I can read fast”). Others described mixed reactions to the hints, such as “it helped me confirm what I thought” versus “I lost focus trying to read it.”
+
+These qualitative insights were not coded in depth but were used to contextualize observed patterns in the quantitative data. For instance, participants who expressed frustration with complex charts often corresponded with lower comprehension scores or longer response times, while those praising simple layouts typically performed better and selected minimalist designs as their favorites. This triangulation between qualitative and quantitative measures strengthened the interpretation that visual clarity directly supports focus for ADHD viewers. Furthermore, open comments revealed a recurring desire for control—participants wanted to toggle hints, adjust color intensity, or hide certain elements—suggesting that agency and customization may be essential for inclusive visualization design.
+
+\subsection{Response Time Tracking}
+
+Although response time was recorded automatically within the survey platform, it was treated as a secondary, exploratory measurement. The timer captured the duration from when a participant opened a chart page until they submitted their answer. However, as noted in the Limitations section, this measurement included several unrelated actions, such as selecting between chart options, reading the question text, and navigating between the chart and LLM hint window. Because of this, the response time cannot be interpreted as a pure measure of cognitive processing speed. Still, it offered contextual information about how participants interacted with the interface.
+
+Preliminary inspection showed that the LLM-assisted condition tended to have slightly longer times overall, which is unsurprising given the extra step of hovering to reveal hints. However, participants’ qualitative feedback suggested that this extended time did not necessarily represent difficulty—many indicated that they paused intentionally to read and reflect. Therefore, timing data were retained as descriptive context rather than as a variable in the main statistical analysis. Future studies could employ more precise time-tracking methods (e.g., event logging or per-question timers) to better isolate comprehension duration from interaction overhead. 
+
 \section{Participants}
 
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.2} % adds vertical space between rows
+    \setlength{\tabcolsep}{8pt}       % adjusts horizontal spacing
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    \textbf{P} & \textbf{Age} & \textbf{ADHD Status} & \textbf{Data Familiarity} & \textbf{Visualization Skill} & \textbf{AI Usage} \\ 
+    \hline
+    1  & 27 & Clinically Diagnosed & Daily (job/study) & High & Daily \\ 
+    2  & 20 & Clinically Diagnosed & Daily (job/study) & High & Daily \\ 
+    3  & 22 & Clinically Diagnosed & Daily (job/study) & Medium & Several/week \\ 
+    4  & 20 & Clinically Diagnosed & Several/week & High & Rarely \\ 
+    5  & 23 & Clinically Diagnosed & Several/week & Medium & Several/week \\ 
+    6  & 25 & Clinically Diagnosed & Occasionally & Medium & Daily \\ 
+    7  & 23 & Clinically Diagnosed & Occasionally & Medium & Daily \\ 
+    8  & 22 & Self Identified & Daily (job/study) & High & Daily \\ 
+    9  & 20 & Self Identified & Daily (job/study) & High & Several/week \\ 
+    10 & 23 & Self Identified & Several/week & High & Daily \\ 
+    11 & 24 & Self Identified & Several/week & High & Daily \\ 
+    12 & 23 & ADHD Traits & Daily (job/study) & High & Daily \\ 
+    13 & 30 & ADHD Traits & Several/week & Medium & Daily \\ 
+    14 & 23 & ADHD Traits & Several/week & Medium & Several/week \\ 
+    15 & 23 & ADHD Traits & Several/week & High & Daily \\ 
+    16 & 22 & ADHD Traits & Occasionally & Medium & Daily \\ 
+    17 & 24 & ADHD Traits & Occasionally & Medium & Daily \\ 
+    18 & 22 & ADHD Traits & Occasionally & High & Rarely \\ 
+    19 & 20 & ADHD Traits & Occasionally & Medium & Daily \\ 
+    20 & 26 & ADHD Traits & Occasionally & Medium & Several/week \\ 
+    \hline
+    \end{tabular}
+    \caption{Participant (P) overview sorted by ADHD status, data familiarity, and AI usage (N = 20)}
+    \label{tab:participants}
+    \end{table}
+
+
+A total of 20 participants based in Germany took part in this study. Each participant completed the online survey independently using their own laptops or desktop computers, ensuring consistency in visual presentation. All participants reported normal or corrected-to-normal vision. In addition to basic demographics such as age, gender, and educational background (summarized in Table~\ref{tab:participants}), the survey also collected information on participants’ familiarity with data visualization, frequency of AI tool usage, and self-assessed confidence in interpreting charts.
+
+Participants represented three ADHD-related categories: \textit{clinically diagnosed}, \textit{self-identified}, and \textit{those who noticed ADHD-like traits without formal evaluation}. This classification reflects the natural diversity of ADHD experiences in daily life, including differences in awareness, diagnostic access, and coping strategies. Including participants from across this range enabled a more inclusive understanding of how attentional differences influence data comprehension and visualization preference.
+
+Beyond their ADHD background, participants varied in how frequently they engaged with data visualizations in their studies or professional work. Some reported working with data on a daily basis, while others only occasionally interacted with graphs or statistics. This variation was considered essential for exploring whether familiarity with data influences comprehension speed and accuracy.
+
+Similarly, participants’ interaction with large language model (LLM) tools such as ChatGPT, Gemini, or Copilot was recorded. The goal was to examine whether users who already engaged regularly with AI tools would respond differently to the LLM-generated hover hints presented in the second part of the experiment. This variable introduces a technological dimension to the analysis, connecting participants’ digital behavior with their ability to interpret and evaluate visual information.
+
+Overall, the participant group represents digitally literate young adults with varying attentional profiles and levels of technological familiarity. Their combined responses offer valuable insight into how cognitive and experiential factors—particularly ADHD-related attention and prior AI exposure—shape comprehension, interpretation accuracy, and design preference in data visualization tasks.
+\cleardoublepage
+
 \chapter{Results}
+The study revealed clear patterns in how adults with ADHD perceive and interpret data visualizations. Across all chart types, participants consistently preferred simpler and more organized designs such as plain bars, lines, and pies, instead of their decorative counterparts. Complex visuals that included 3D effects, stacked bars, or pictographic elements often led to distraction or sensory overload, reinforcing the idea that visual simplicity supports cognitive focus. The addition of short LLM-generated hover hints showed mixed results. Many participants used them as reassurance or confirmation, while others found them disruptive to their visual flow. For some, the hints provided clarity and reduced uncertainty, but for others, they added another layer of cognitive effort.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at nunc ut ex aliquam fermentum nec ut orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus sollicitudin pulvinar est, quis porttitor nisi egestas id. Cras et dignissim elit, vitae fringilla arcu. Aliquam rhoncus convallis aliquam. Aliquam erat volutpat. Proin efficitur sapien et velit aliquet imperdiet. Aenean tristique augue ultricies enim venenatis, ut mattis massa fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis vitae lobortis nunc. Nulla facilisis leo sed gravida elementum. Integer suscipit scelerisque lacinia. Nulla consectetur maximus purus a varius. Curabitur porta orci nisi, non porttitor lectus hendrerit vitae. Nam rutrum elementum nibh et luctus. Donec nec augue ultrices, ornare mauris non, iaculis nisl.
+Beyond the numbers, participants’ comments revealed the same trend. Clear contrast, direct labeling, and minimal clutter helped them stay engaged and confident, while overstimulating layouts made the task feel mentally tiring. These findings highlight not only the cognitive challenges ADHD users experience when processing visual information but also their strong awareness of what makes a visualization comfortable to read. The following sections explore these observations in more depth, examining how design simplicity, cognitive load, and AI-generated hints shaped comprehension and preference.
 
-Morbi faucibus lectus nec est imperdiet, quis placerat ligula pretium. Ut dignissim in orci eu ornare. Aenean id diam nunc. Integer dictum vitae lorem sit amet consectetur. Phasellus ac ipsum eget nisi gravida vehicula ac et metus. Vestibulum ac odio at diam dapibus tristique non quis massa. Praesent nec sollicitudin mauris. Nam elementum dictum est, id lacinia eros finibus quis. Suspendisse potenti. Quisque libero leo, iaculis sed sem quis, euismod tempor tellus. Aenean sit amet ex dapibus, fringilla purus et, sagittis metus. Aenean semper eget erat ac ullamcorper. Suspendisse convallis molestie nisi vitae dignissim.
+\section{Comprehension Accuracy}
+
+The primary research question examined whether AI-generated hover hints improved comprehension accuracy across chart types. Each response was scored dichotomously as \textit{1} (correct) or \textit{0} (incorrect), and average accuracy scores were calculated for bar, pie, and line charts under both conditions—LLM-assisted and non-assisted.
+
+The analysis revealed small but notable differences between conditions. On average, participants in the non-assisted condition performed similarly or slightly better than those with AI-generated support. In particular, bar charts yielded the highest comprehension accuracy overall, followed by line charts and then pie charts. Pie charts had the lowest accuracy across both groups, supporting the hypothesis that circular representations impose higher perceptual load and are less efficient for comparing magnitudes. 
+
+An ANOVA was performed to compare mean comprehension scores between assisted and unassisted participants across chart types. The analysis did not reveal a statistically significant difference between conditions (\(p > 0.05\)), indicating that the addition of LLM-generated hints did not substantially alter comprehension performance. However, this outcome aligns with expectations considering the small sample size (\(N = 20\)) and the exploratory nature of the study. The results nonetheless provide direction for understanding when AI assistance may or may not support interpretation.
+
+Visual inspection of the mean scores (see Figures~\ref{fig:barcharts},~\ref{fig:piecharts},~\ref{fig:linecharts}) highlights consistent trends across conditions. Bar charts displayed minimal variation between groups, suggesting that their inherent clarity may leave little room for improvement through textual explanations. For line charts, comprehension improved marginally with LLM assistance, hinting that textual scaffolding could help guide attention when interpreting slopes and trends. Pie charts showed negligible change or even a slight decrease in accuracy in the assisted condition, suggesting that additional text might have compounded the perceptual challenge of this format.
+
+These findings partially support the hypothesis that AI-generated explanations can aid comprehension for moderately complex visuals but may offer limited benefit—or even distraction—when the visual already demands significant attention. In other words, the effectiveness of assistance appears contingent on both the baseline visual complexity and the cognitive demands of the chart type.
+
+\section{Response Time Patterns}
+
+Although response times were automatically recorded, their interpretation required caution. The recorded duration represented the total interaction time per chart, encompassing reading, comparing, hovering, and answering, rather than purely cognitive processing. Because participants in the LLM-assisted condition needed to navigate between two browser windows (Qualtrics and Figma) and hover to reveal hints, their measured times were often longer even if their comprehension effort was comparable.
+
+Nevertheless, descriptive analysis revealed that the LLM-assisted condition consistently showed slightly longer completion times. Qualitative feedback, however, suggested that this increase reflected deliberate engagement rather than confusion. Several participants mentioned rereading the hints to verify their understanding, aligning with the notion that the added textual layer redistributed cognitive effort rather than increasing it. This observation resonates with cognitive load theory \citep{sweller1988cognitive}, which posits that well-designed guidance can shift mental resources toward meaningful integration instead of extraneous search. Consequently, while time data cannot be treated as a direct indicator of difficulty, it does illustrate that LLM-based assistance may encourage deeper, more reflective engagement.
+
+Future work could refine this measurement by introducing per-question timers or event logging to distinguish between viewing and interaction phases. Such precision would clarify whether AI-generated explanations reduce or extend actual comprehension time under controlled conditions.
+
+\section{Chart Preferences}
+
+Beyond accuracy, the study explored subjective preferences between visual styles. Participants compared pairs of charts differing in one design aspect—such as baseline versus 3D effect, labeled versus unlabeled, or plain versus textured—and selected the version they preferred. These binary responses were aggregated into percentage frequencies.
 
 
+\subsection{Bar Chart Preferences}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/BarCharts.png}
+    \caption{Participant preferences for bar chart variations. Higher values indicate a greater number of participants selecting the design as most preferred.}
+    \label{fig:BarCharts}
+  \end{figure}
+
+Participants showed a strong preference for plain single-color bar charts with direct value labels. Stacked and pictographic versions were rarely chosen. The simplicity of the plain bars made them easier to read and compare at a glance. Many described the other versions as “cluttered” or “visually heavy.” This pattern mirrors the comprehension results, where plain bars also produced the highest accuracy scores.
+
+\subsection{Line Chart Preferences}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/LineCharts.png}
+    \caption{Participant preferences for line chart variations. Higher values indicate a greater number of participants selecting the design as most preferred.}
+    \label{fig:LineCharts}
+  \end{figure}
+
+For line charts, participants preferred clean, flat designs with one or two clearly distinguished lines. Charts with overlapping lines, gradient fills, or multiple colors were often described as “confusing.” Direct labeling on each line improved clarity, while legends and color-coding required extra effort to interpret. These findings reinforce that minimizing reference switching supports focus and reduces working-memory load for ADHD viewers \citep{ayres2010split,sweller1988cognitive}.
+
+\subsection{Pie Chart Preferences}
+
+\begin{figure}
+    \centering
+    \includegraphics[width =.8\textwidth]{figures/PieCharts.png}
+    \caption{Participant preferences for pie chart variations. Higher values indicate a greater number of participants selecting the design as most preferred.}
+    \label{fig:PieCharts}
+  \end{figure}
+
+Pie charts revealed the strongest aversion to visual embellishment. The plain 2D pies were chosen almost exclusively, while 3D and textured versions were described as “chaotic,” “hard to focus on,” and “visually overstimulating.” Several participants noted that the extra shading or depth “looked nice but made it harder to tell the sizes apart.” This supports earlier findings that ADHD viewers reach perceptual overload faster when visual noise increases \citep{tran2024accessible,almuwaiziri2023}.
+
+
+
+
+Overall, participants favored minimalist designs that emphasized clarity and contrast. Across chart types, simple two-dimensional visuals with direct labeling received the most positive ratings. Complex designs such as 3D or textured charts were often described as “confusing” or “too busy.” For example, 80\% of participants preferred the baseline bar chart to its 3D variant, citing that “the plain version is easier to compare.” Similarly, line charts with clear data labels were favored over those with overlapping lines, as users found them easier to follow visually. Pie charts were the least preferred overall, particularly when segments were close in size or when colors lacked sufficient contrast.
+
+These findings reinforce the principle that perceptual simplicity improves accessibility. Participants with ADHD, who often struggle with visual overstimulation, consistently gravitated toward designs with minimal clutter and direct information mapping. The observed preferences align with previous research emphasizing the importance of perceptual hierarchy and visual grouping \citep{cleveland1984graphical, tufte1983visual, few2012show}.
+
+Interestingly, the presence of LLM-generated hints did not significantly change chart preference trends. While a few participants in the assisted group reported that hints “helped clarify what to look at,” others described them as “distracting” or “redundant.” This ambivalence indicates that assistive text must be context-sensitive and user-controlled to enhance rather than hinder visualization comfort.
+
+\section{Qualitative Feedback on LLM Assistance}
+
+Open-ended responses revealed nuanced perspectives on the role of LLM-generated hints. While some participants found the hover explanations useful for identifying key patterns or verifying their interpretations, others criticized them as generic, irrelevant, or visually intrusive.
+
+Common themes included the following:
+\begin{itemize}
+    \item \textbf{Task-contingent hints are crucial.} Several participants noted that hints should relate directly to the specific question being asked (e.g., “focus on rate of change” when the task concerns trends). Generic comments about the chart structure were viewed as unhelpful. This suggests that future LLM implementations should link hints to question types and automatically detect relevant data features.
+    \item \textbf{Control and timing of hints.} Some participants wished for more control over when hints appeared, suggesting a toggle or button instead of automatic hover triggers. For ADHD users, unexpected pop-ups can disrupt focus; an intentional reveal mechanism could reduce unwanted distraction.
+    \item \textbf{Content specificity.} Participants expressed that many hints restated obvious information, such as identifying the largest category, rather than providing new insights. They recommended deeper analytical cues or context-sensitive guidance that helps interpret, not just describe, the data.
+    \item \textbf{Design integration.} Overlapping hint boxes occasionally obscured chart elements, breaking visual continuity. This highlights the need for improved spatial placement and adaptive positioning of explanations in future prototypes.
+\end{itemize}
+
+Despite these critiques, a recurring sentiment was that the idea of “AI support for data interpretation” holds promise. Participants recognized the potential of interactive, adaptive LLM systems that could answer personalized questions about charts—akin to conversational visualization interfaces such as VizAbility \citep{vizability2024}. However, the static, one-size-fits-all implementation used in this study was seen as a prototype stage, useful for proof of concept but insufficiently responsive to individual needs.
+
+\section{Summary of Findings}
+
+In summary, the results demonstrate that while AI-generated hints did not significantly improve comprehension accuracy or reduce response time, they sparked meaningful engagement and valuable user feedback for future adaptive visualization research. Participants with ADHD performed best with clean, directly labeled charts and showed consistent aversion to visual clutter. Their comments underscore a broader accessibility principle: minimalism and clarity reduce extraneous cognitive load, supporting more focused attention and accurate interpretation.
+
+From a practical perspective, these results suggest that effective support for neurodiverse users may depend less on adding new features and more on refining visual design fundamentals. If AI assistance is to be beneficial, it should be dynamic, context-aware, and user-controlled rather than static or intrusive. These insights not only validate existing best practices in data visualization design but also highlight new pathways for integrating AI into accessible visual interfaces.
+\cleardoublepage
 
 \chapter{Discussion}
+\section{Preference for Plain Charts over Embellished Versions}
+
+Across all chart types in our study (pie, bar, and line charts), ADHD participants showed a strong and consistent preference for the simplest, baseline versions. Plain 2D pie charts were chosen far more often than 3D or icon-enhanced versions; standard single-color bar charts were favored over stacked or pictographic variations; and line charts with direct data labels were preferred to those containing extra textures or multiple encodings. In every case, the less-decorated chart was seen as easier to understand. This finding aligns with established design principles such as Tufte’s data-ink ratio, which discourages “chartjunk”—visual decorations that do not encode data meaningfully \citep{tufte1983visual}. Participant comments frequently described the embellished charts as “chaotic” or “busy,” while the plain designs were referred to as “clean” and “easy to read.” These observations reinforce the guidance to remove non-data graphics: accessibility experts note that extra lines, shadows, or icons “do not add to the meaning of the data” and may distract rather than assist viewers \citep{few2012show}. 
+
+The ADHD participants’ preference for high data-to-ink ratio designs likely reflects an intuitive coping strategy. By focusing on simpler visuals, they could allocate limited attention and working memory capacity more efficiently. Cognitive load theory reminds us that human short-term memory is severely limited, and designers should minimize extraneous cognitive load \citep{sweller1988cognitive}. Charts with less decoration inherently impose lower cognitive load, making them more accessible for viewers with ADHD. 
+
+Research from the Nielsen Norman Group and related usability studies confirms that cognitive overload disproportionately affects people with ADHD. Dashboards or charts that attempt to display too much information at once create cluttered, dense layouts that hinder focus and prioritization. Our findings echo these insights: participants consistently favored visuals that were simple, organized, and legible. They preferred consistent colors, direct labels, and uncluttered bars or lines rather than decorative complexity. For example, participants valued seeing numeric values atop bars or percentages on pie slices rather than interpreting patterns or icons. This matches best-practice guidelines recommending direct labeling over reliance on legends or color-only encodings \citep{cleveland1984graphical}. In our line charts, directly labeling each line series was clearly preferred to using external legends.
+
+In summary, ADHD users benefit from minimalist design: fewer moving parts, no unnecessary embellishment, and reduced visual noise. These results are consistent with prior neurodiversity research. Purba et al.\ (2024) found that additional text or icons slowed down ADHD viewers and recommended using minimal visual decoration. Similarly, we observed that even small embellishments (3D effects, icons, textures) diverted attention away from the core message. Thus, plain charts—those that maximize data-ink and minimize ornamentation—were consistently judged as clearest and most usable.
+
+\section{Overstimulation and Distraction by Complex Charts}
+
+Beyond the preference for simplicity, several participants explicitly described overstimulation when interacting with complex charts. Textured or highly decorated charts, such as 3D pies or bars with patterns and shadows, triggered sensory discomfort and frustration. Participants with ADHD tend to experience sensory inputs more intensely and struggle to filter irrelevant stimuli \citep{castellanos2006adhd}. One participant wrote, “The 3D pie felt like extra stuff I don’t need; it makes the numbers harder to see.” Another commented, “Those icons make me want to count them—it’s overwhelming.” These remarks illustrate how decorative elements can unintentionally compete for cognitive resources, producing the kind of sensory overload described in the ADHD literature \citep{fisher2022attention}.
+
+This filtering difficulty is a hallmark of ADHD: sensory inputs compete for attention, often triggering cognitive strain. Charts with repetitive icons, dense hatching, or excessive gradients amplified this effect. Some participants even shifted focus away from data entirely, engaging more with the LLM hint text instead of the chart itself. From a cognitive load perspective, these elements represent extraneous load—irrelevant information that consumes working memory without supporting comprehension \citep{sweller1988cognitive}. 
+
+We observed similar effects with line charts containing multiple overlapping lines or gradient fills. Participants preferred simpler designs with one or two clearly marked series. As one user stated, “I can’t tell which line is which; my brain just gets stuck.” This reaction reflects the ADHD tendency to disengage when visual complexity exceeds manageable levels. As noted by Purba et al.\ (2024), a high perceptual load can occasionally focus ADHD attention—but only when it remains directly relevant to the task. Unnecessary complexity, by contrast, adds noise and triggers frustration.
+
+Overall, these findings confirm that visual complexity can cause sensory and cognitive overload in ADHD audiences. Because their attentional systems are more easily hijacked by irrelevant details, even subtle background textures or multiple colors can disrupt focus. Designing for ADHD therefore requires deliberate reduction of visual stimulation. Each element in a chart should serve a clear communicative function; if it does not, it likely increases extraneous cognitive load rather than aiding understanding.
+
+\section{Effects of LLM Hints on Preference and Cognition}
+
+A secondary research focus investigated whether LLM-generated hover hints influenced participants’ preferences or cognitive engagement. These hints, generated by a large language model, appeared on hover and offered short explanations of chart content. While the hints occasionally improved comprehension confidence, they did not alter participants’ fundamental preference for simple charts. Both groups—assisted and unassisted—favored the baseline versions.
+
+Some participants described the hints as supportive: they acted as confirmations that their interpretation was correct (“It made me sure about what I saw”). In such cases, the hints reduced uncertainty and helped offload cognitive effort by translating visual information into concise text. This aligns with cognitive load theory’s notion of germane load—mental effort directed toward meaningful learning.
+
+Others, however, reported the opposite: reading the hints disrupted their visual focus and introduced an extra cognitive step. “I have to stop looking at the chart to read,” one participant noted. For ADHD users, whose attention is already volatile, this kind of shift between visual and textual processing can exacerbate overload. This aligns with the split-attention effect \citep{ayres2010split}, which warns that spatially separated visual and textual information can increase extraneous load.
+
+Thus, while hover hints may serve as helpful scaffolding for some users, they can also fragment attention for others. The key lies in how the hint information is integrated. Accessibility literature recommends that tooltips or annotations add meaningful insight, not redundancy. For ADHD users, hints were most effective when they highlighted difficult-to-see aspects—such as trends or outliers—rather than restating axis labels. Moreover, participants noted usability issues with hover-only interactions, suggesting future iterations should allow for toggled or persistent hints rather than transient ones.
+
+In sum, LLM hints offered potential benefits for reassurance and guidance but also introduced friction in the reading process. Their value depends on timing, relevance, and presentation. The broader implication is that assistive AI features should complement—not compensate for—clear visual design.
+
+\section{Integrating ADHD and Cognitive Load Literature}
+
+Our findings correspond with existing research on ADHD, attention, and data visualization. Some previous studies noted that ADHD users may find embellished visuals initially more engaging \citep{tran2024accessible}, but this engagement does not always translate to better comprehension. Similarly, in our study, participants found some decorative charts visually appealing but ultimately chose the simpler ones as easier to understand. This aligns with the idea that enjoyment and readability may diverge for ADHD users.
+
+Purba et al.\ (2024) proposed that user preference among ADHD participants may not always align with optimal performance outcomes. Our results partially confirm this hypothesis: although we measured preference rather than performance, participants’ chosen charts were those theoretically expected to maximize accuracy and reduce cognitive strain. The preference for clarity thus directly reflects functional accessibility rather than superficial appeal.
+
+Sensory sensitivity theory further explains the discomfort participants expressed toward busy visuals. Individuals with ADHD frequently report hypersensitivity to textures and patterns \citep{castellanos2006adhd}, meaning visual clutter can feel physically unpleasant. Descriptions such as “my eyes jump around” or “it feels noisy” exemplify this sensory overload. These insights emphasize the need for control and predictability in visual presentation.
+
+Cognitive load theory also contextualizes the mixed effects of LLM hints. As Sweller (1988) emphasized, excessive information stored simultaneously in working memory leads to overload. For ADHD users, this limitation is even more pronounced due to challenges with sustained focus and working memory capacity. Thus, textual hints should be concise and directly tied to the visual content to avoid imposing additional processing effort.
+
+Overall, our results are consistent with universal accessibility principles. Guidelines from Accessible Analytics and the Nielsen Norman Group—such as using clear hierarchy, avoiding clutter, and enabling progressive disclosure—match exactly what our participants favored. Clarity and simplicity not only aid ADHD viewers but improve comprehension for all users, supporting the “universal design” perspective in HCI.
+
+\section{Design Recommendations}
+
+Drawing on these results and the theoretical framework above, we propose several design recommendations for creating charts accessible to ADHD users:
+
+\begin{itemize}
+    \item \textbf{Minimize chart junk.} Remove all non-essential decorations such as 3D effects, shadows, and patterns. Stick to flat graphics and neutral palettes.
+    \item \textbf{Use plain, uncluttered chart types.} Prefer simple bar and line charts. Avoid stacked or pictographic variations unless the icons directly represent data meaning.
+    \item \textbf{Label data directly.} Place numeric values on bars, pie slices, or line peaks to eliminate the need for cross-referencing legends.
+    \item \textbf{Simplify color schemes.} Use a limited set of high-contrast colors. Avoid textures and redundant shapes that compete for attention.
+    \item \textbf{Minimize text but provide context.} Keep captions short and relevant. Offer additional explanations via optional tooltips or toggles.
+    \item \textbf{Design interactive hints carefully.} Make hints optional, persistent on demand, and context-aware. Avoid restating obvious information.
+    \item \textbf{Apply progressive disclosure.} Reveal information in layers—starting simple and allowing users to explore more detail gradually.
+    \item \textbf{Follow general accessibility practices.} Ensure readable fonts, clear grouping, consistent alignment, and adequate spacing to support smooth eye movement.
+\end{itemize}
+
+In essence, the safest approach for ADHD-friendly charts is one of clarity and restraint. High data-to-ink ratios and intentional use of white space make visuals easier to process. When AI explanations are included, they should integrate seamlessly without competing for attention.
+
+\section{Limitations and Reflections}
+
+Although the study produced clear qualitative and quantitative trends, several limitations constrain the scope and interpretation of its findings. These limitations are not only methodological but also conceptual, reflecting both the exploratory nature of this research and my own position as a researcher still learning how to operationalize neurodiversity-informed design in practice. By discussing them transparently, I aim to contextualize the results, clarify potential biases, and highlight concrete opportunities for methodological improvement.
+
+\subsection{Sample Size and Participant Composition}
+
+The most immediate limitation is the small sample size (\(N=20\)). While this number allowed for manageable data collection and manual qualitative analysis, it restricts statistical power and generalizability. Subtle effects—particularly those differentiating between chart types or hint conditions—may not have reached significance simply due to limited data. A larger dataset could confirm whether the observed tendencies (e.g., preference for plain designs, mixed reactions to LLM hints) persist across a broader ADHD population.
+
+Moreover, the sample consisted exclusively of self-selected volunteers, most of whom were young adults based in Germany and highly familiar with digital tools. This creates a demographic bias toward educated, tech-savvy individuals who may not represent the full spectrum of ADHD experiences. For instance, participants who regularly use AI tools may already possess higher tolerance for on-screen multitasking or text overlays, potentially influencing how they perceived the LLM hints. Similarly, people with limited exposure to digital dashboards or statistical graphics might struggle more with basic chart reading tasks—an effect this study could not isolate. Future research should seek a more heterogeneous sample across age, education, and digital literacy levels to ensure broader applicability.
+
+\subsection{Absence of a Neurotypical Control Group}
+
+A second major limitation is the lack of a neurotypical comparison group. Without such a baseline, it remains unclear to what extent the observed preferences are ADHD-specific versus universal human tendencies. Minimalist chart design benefits nearly all users, and it is plausible that non-ADHD participants would also have chosen the same plain designs. While literature suggests that people with ADHD are particularly vulnerable to distraction and overload, the absence of a control group prevents direct attribution. Consequently, the current study can only claim that the tested designs were \emph{compatible with} ADHD needs, not that they were uniquely beneficial to ADHD cognition.
+
+Future work could employ a matched-group design in which ADHD and neurotypical participants complete the same tasks. This would allow for clearer differentiation between general usability improvements and neurodiversity-specific accommodations. Including such comparisons would also help clarify whether AI-based assistance (e.g., LLM hints) provides unique advantages for neurodivergent cognition or simply acts as a generic learning aid.
+
+\subsection{Measurement and Task Design}
+
+Another limitation concerns the way comprehension and timing were measured. The survey platform recorded total time per chart, but not the time spent on sub-tasks (reading the question, interpreting, or answering). Therefore, time data conflates multiple behaviors and cannot be used as a precise proxy for cognitive load. Additionally, the need to switch between browser windows (Qualtrics and Figma) in the LLM-assisted condition introduced procedural delays unrelated to mental effort. This interface constraint likely inflated completion times for the assisted group and may have masked subtle differences in true comprehension speed.
+
+A more robust setup could employ embedded timers or event logging that distinguishes between phases of interaction. Eye-tracking or screen recording would also make it possible to infer where attention is allocated and whether hints genuinely reduce search time. Similarly, accuracy scoring was binary (1 = correct, 0 = incorrect), which oversimplifies real cognitive performance. Some “incorrect” answers may have reflected partial understanding or ambiguous question phrasing rather than failure to interpret the chart. Using graded or confidence-based scoring could yield a more nuanced measure of comprehension quality.
+
+The preference data, while insightful, also relies on self-reported choices rather than observed behavior. Participants indicated which chart they liked best, but not necessarily which they found fastest or least tiring to interpret. Preference and performance may diverge—an effect already noted in the ADHD visualization literature. Without behavioral validation, we can only infer accessibility indirectly from user statements.
+
+\subsection{Design of the LLM Hints}
+
+The static hover-based LLM hints represent both a methodological constraint and a design limitation. They were generated manually before the study and were not context-aware or conversational. This differs substantially from how an adaptive LLM might behave in practice. Because the hints were short and generic, they often reiterated obvious facts instead of offering analytical guidance. Participants who already understood the chart found them redundant, whereas those who needed help sometimes found them too vague. As such, this implementation only approximated what an AI assistant could do.
+
+In addition, hover-only presentation introduced interaction issues. Some users reported that the tooltip vanished too quickly or obscured part of the chart. On touch devices or trackpads, hovering can be unreliable, leading to inconsistent experiences. The study did not measure how often participants failed to trigger or read the hint. Consequently, any conclusions about hint effectiveness should be interpreted cautiously: results reflect not only cognitive reactions but also interface usability.
+
+A more rigorous evaluation of LLM-based aids would require dynamically generated hints tailored to the task and user. For example, an adaptive model could detect question type (“trend,” “comparison,” “outlier”) and produce targeted summaries rather than fixed text. Logging hint usage frequency and reading duration could also reveal whether assistance correlates with better performance or simply increases task time. These improvements would help isolate the cognitive contribution of AI support from mechanical interface factors.
+
+\subsection{Prototype Fidelity and Remote Context}
+
+Because the experiment used static Figma prototypes rather than fully functional dashboards, participant interaction was limited. The lack of dynamic behavior (e.g., highlighting, filtering, zooming) meant users could not explore the data naturally. This design simplification ensured experimental control but reduced ecological validity: real-world data visualization is often interactive and exploratory. Future studies should test ADHD-friendly design principles within working prototypes that more closely mirror everyday analytical tools.
+
+Furthermore, the study was conducted remotely. Participants used their own devices, in uncontrolled environments with varying screen sizes, brightness, and distractions. Some may have completed the survey in quiet surroundings; others might have been multitasking or fatigued. Such factors disproportionately affect ADHD participants and could have introduced noise into the data. In-person lab testing could mitigate these issues, allowing standardized hardware, lighting, and timing control.
+
+\subsection{Researcher Bias and Subjectivity}
+
+As the study was designed and analyzed by a single researcher, personal interpretation inevitably shaped decisions—from which chart pairs to include, to how qualitative comments were coded. In particular, manual scoring of comprehension responses and thematic grouping of user quotes involved subjective judgment. While every effort was made to apply consistent criteria, bias cannot be ruled out. Future replication with inter-rater reliability checks or automated text analysis (e.g., sentiment classification) would strengthen objectivity.
+
+There is also a broader positionality concern. As a researcher interested in accessibility and neurodiversity, I approached this project with an assumption that simplicity and minimalism would benefit ADHD users. While the results support this, the risk of confirmation bias remains. Some design alternatives—such as adaptive embellishment or gamified cues—may also have potential but were excluded due to these initial expectations. Subsequent research should challenge these assumptions by testing a wider range of visual styles and interaction modalities.
+
+\subsection{Theoretical and Conceptual Boundaries}
+
+Finally, this study’s scope was intentionally narrow: it focused on chart design and AI-generated explanations within a small-scale comprehension task. ADHD, however, manifests in diverse cognitive and emotional ways—impulsivity, motivation fluctuations, hyperfocus—that extend beyond visual processing alone. The results therefore capture only a subset of ADHD-related challenges. The term “ADHD user” here should be understood as shorthand for “adults self-identifying with attentional differences,” not as a clinical claim about diagnostic categories.
+
+Furthermore, the study treated ADHD as a relatively homogeneous group. In reality, symptom expression varies widely across individuals and subtypes. Some participants may have developed compensatory strategies that mitigate distractibility, while others may rely heavily on external aids. Without detailed profiling or triangulation with clinical measures (e.g., attention-span tests), we cannot determine which specific cognitive traits influenced performance or preference. Future work combining psychometric and behavioral data would help clarify these mechanisms.
+
+\subsection{Future Methodological Improvements}
+
+Based on these reflections, several concrete methodological refinements are recommended:
+
+\begin{itemize}
+    \item Increase participant diversity in age, background, and ADHD subtype to capture variability in attentional responses.
+    \item Include a neurotypical control group to differentiate universal design effects from ADHD-specific effects.
+    \item Implement dynamic, context-sensitive LLM hints integrated directly into the visualization environment.
+    \item Employ detailed interaction logging (e.g., hover durations, hint reads, click paths) for richer behavioral analysis.
+    \item Conduct in-lab studies using standardized hardware and eye-tracking to isolate cognitive mechanisms.
+    \item Introduce graded scoring systems to distinguish partial understanding from complete misinterpretation.
+    \item Apply inter-rater reliability checks in qualitative coding to reduce researcher subjectivity.
+\end{itemize}
+
+\subsection{Summary}
+
+In sum, this study provides an early, exploratory perspective on ADHD-friendly visualization and LLM-based assistance. Its small scale and methodological constraints limit the strength of causal claims, but the transparency of its process highlights crucial design considerations for future research. By acknowledging these limitations, we can situate the findings not as final answers but as building blocks toward more rigorous, inclusive, and data-driven approaches to cognitive accessibility in visualization design.
 
 \chapter{Conclusion}
 \label{sec:conclusion}
 
-\todo{Outlook}
+This study demonstrated that visual simplicity plays a decisive role in supporting comprehension and focus among adults with ADHD. Across all chart types—bar, line, and pie—participants consistently favored minimal, clearly structured visuals over decorative or information-heavy alternatives. The results suggest that while aesthetic enhancements such as gradients, icons, or 3D effects may appear engaging, they tend to increase cognitive load and disrupt sustained attention. In contrast, charts with clean layouts, consistent color coding, and direct labels encouraged faster interpretation and higher confidence.
+
+The mixed feedback on LLM-generated hover hints revealed that AI assistance can both help and hinder comprehension depending on its timing and presentation. Participants valued concise, context-relevant hints as reassurance, but excessive or poorly integrated text interrupted visual reasoning. These findings underline the need for careful moderation when adding AI explanations to data interfaces intended for neurodiverse audiences.
+
+Overall, the results reinforce key principles of neuroinclusive design: reducing unnecessary visual complexity, providing direct and consistent labeling, and supporting autonomy without overwhelming the user. By combining quantitative accuracy data with participants’ qualitative reflections, this study highlights how accessibility in data visualization is not merely a technical question but a perceptual and cognitive one. The insights gained here offer a foundation for future research exploring adaptive visualization systems that dynamically adjust complexity based on users’ attention patterns and cognitive preferences.
